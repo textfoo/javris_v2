@@ -152,11 +152,16 @@ class BrokerInterface {
     static async fetchBetsByBookId(bookId) {
         try {
             Logger.info(`BrokerInterface | fetchBetsByBookId | bookId : ${bookId}`);
-            let response = await collection.aggregate([
-
-            ]);
+            const response = await collection.aggregate([
+                { $unwind :  '$books' },
+                { $match : { 'books._id' : ObjectId(bookId) }}, 
+                { $unwind : '$books.bets' },
+                { $project : {  'books.bets' : 1  }}
+            ]).toArray();
+            Logger.info(`BrokerInterface | fetchBetsByBookId | response : ${JSON.stringify(response)}`);
+            return response;
         }catch(error) {
-
+            Logger.error(`BrokerInterface | fetchBetsByBookId | error : ${error}`); 
         }
     }
 
