@@ -61,4 +61,10 @@ typings/
 .next
 
 #configuration file
+<<<<<<< HEAD
 config/prod
+=======
+config/prod/config.json
+config/prod/db-config.json
+config/prod/socket-config.json
+>>>>>>> 94f3643e9805787f55e6fc28d56267b8982081dc
