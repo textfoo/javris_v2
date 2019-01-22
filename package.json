@@ -1,0 +1,27 @@
+{
+  "name": "discord-botv2",
+  "version": "1.0.0",
+  "description": "nlp-driven discord bot",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon",
+    "test": "jest --watchAll"
+  },
+  "keywords": [
+    "nodejs",
+    "discordjs",
+    "node-nlp"
+  ],
+  "author": "textfoo",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "discord.js": "^11.4.2",
+    "mongodb": "^3.1.8",
+    "node-nlp": "^2.3.0",
+    "winston": "^3.1.0"
+  }
+}

@@ -1,0 +1,43 @@
+{
+    "docs" : [
+        { 
+            "lang" : "en",
+            "text" : "cmd list", 
+            "intent" : "tutorial-cmds"
+        }, 
+        {
+            "lang" : "en", 
+            "text" : "help me", 
+            "intent" : "tutorial"
+        }, 
+        {
+            "lang" : "en",
+            "text" : " commands", 
+            "intent" : "tutorial-cmds"
+        }, 
+        {
+            "lang" : "en", 
+            "text" : "tutorial", 
+            "intent" : "tutorial"
+        }, {
+            "lang" : "en", 
+            "text" : "about yourself", 
+            "intent" : "tutorial-about"
+        }
+    ], 
+    "answers" : [
+        {
+            "lang" : "en", 
+            "intent" : "tutorial", 
+            "text" : "Here's how this works..."
+        }, {
+            "lang" : "en", 
+            "intent" : "tutorial-cmds",
+            "text" : "Commands"
+        }, {
+            "lang" : "en", 
+            "intent" : "tutorial-about", 
+            "text" : "Thank you for asking. Give a second for some self reflection and analysis..."
+        }
+    ]
+}

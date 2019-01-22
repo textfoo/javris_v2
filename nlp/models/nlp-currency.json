@@ -1,0 +1,16 @@
+{
+    "docs" : [
+        {
+            "lang" : "en", 
+            "text" : "$%currency%", 
+            "intent" : "currency"
+        }
+    ],
+    "answers" : [ 
+        {
+            "lang" : "en", 
+            "intent" : "currency", 
+            "text" : "{{currency}}"
+        }
+    ]
+}

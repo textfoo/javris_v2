@@ -1,0 +1,87 @@
+{
+    "docs" : [        {
+        "lang" : "en",
+        "text" : "setup", 
+        "intent" : "broker-create"
+        },{
+            "lang" : "en", 
+            "text" : "create book", 
+            "intent" : "book-create"
+        },{
+            "lang" : "en",
+            "text" : "create bet", 
+            "intent" : "bet-create"
+        }, {
+            "lang" : "en", 
+            "text" : "open bet", 
+            "intent" : "bet-create"
+        },{
+            "lang" : "en", 
+            "text" : "open book", 
+            "intent" : "book-create"
+        }, {
+            "lang" : "en", 
+            "text" : "open a book", 
+            "intent" : "book-create"
+        }, {
+            "lang" : "en", 
+            "text" : "new book", 
+            "intent" : "book-create"
+        },{
+            "lang" : "en",
+            "text" : "fetch broker", 
+            "intent" : "broker-find"
+        },
+        {
+            "lang" : "en",
+            "text" : "show broker",
+            "intent" : "broker-find"
+        },
+        {
+            "lang" : "en",
+            "text" : "find broker",
+            "intent" : "broker-find"
+        },{
+            "lang" : "en",
+            "text" : "fetch book", 
+            "intent" : "book-find"
+        },
+        {
+            "lang" : "en",
+            "text" : "show books",
+            "intent" : "book-show"
+        },
+        {
+            "lang" : "en",
+            "text" : "find book",
+            "intent" : "book-find"
+        }
+    ], 
+    "answers" : [
+        {
+            "lang" : "en",
+            "intent" : "bet-create", 
+            "text" : "Creating Bet..."
+        },{
+            "lang" : "en", 
+            "intent": "book-create", 
+            "text" : "Issuing Create Order..."
+        },        {
+            "lang" : "en",
+            "intent" : "broker-create", 
+            "text" : "Creating broker..."
+        },{
+            "lang" : "en",
+            "intent" : "broker-find", 
+            "text" : "Fetching broker..."
+        },{
+            "lang" : "en",
+            "intent" : "book-find", 
+            "text" : "Fetching book..."
+        }, {
+            "lang" :"en",
+            "intent" : "book-show", 
+            "text" : "Fetching books..."
+        }
+    ]
+}

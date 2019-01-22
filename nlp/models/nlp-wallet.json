@@ -1,0 +1,16 @@
+{
+    "docs" : [
+        {
+            "lang" : "en",
+            "text" : "setup", 
+            "intent" : "wallet-create"
+        }
+    ],
+    "answers" : [
+        {
+            "lang" : "en",
+            "intent" : "wallet-create", 
+            "text" : "Creating new wallet..."
+        }
+    ]
+}

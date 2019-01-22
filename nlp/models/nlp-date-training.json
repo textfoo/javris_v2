@@ -1,0 +1,28 @@
+{
+    "docs" : [
+        {
+            "lang" : "en", 
+            "text" : "ends %date%", 
+            "intent" : "date-end"
+        }, {
+            "lang" : "en", 
+            "text" : "ending on %date%", 
+            "intent" : "date-end"
+        },{
+            "lang" : "en", 
+            "text" : "close %date%", 
+            "intent" : "date-end"
+        },{
+            "lang" : "en", 
+            "text" : "expire %date%", 
+            "intent" : "date-end"
+        }
+    ],
+    "answers" : [
+        {
+            "lang" : "en", 
+            "intent" : "date-end", 
+            "text" : "{{date}}"
+        }
+    ]
+}

@@ -1,0 +1,43 @@
+{
+    "docs" : [
+        {
+            "lang" : "en", 
+            "text" : "hello", 
+            "intent" : "greeting-hello"
+        }, {
+            "lang" : "en",
+            "text" : "hey", 
+            "intent" : "greeting-hello"
+        }, {
+            "lang" : "en", 
+            "text" : "hi", 
+            "intent" : "greeting-hello"
+        }, 
+        {
+            "lang" : "en", 
+            "text" : "good bye", 
+            "intent" : "greeting-bye"
+        },  {
+            "lang" : "en", 
+            "text" : "yo", 
+            "intent" : "greeting-hello"
+        }
+    ],
+    "answers" : [
+        {
+            "lang" : "en", 
+            "intent" : "greeting-hello", 
+            "text" : "Greetings, what can I do for you?",
+            "associated-delegate" : "collectInput"
+        }, {
+            "lang" : "en", 
+            "intent" : "greeting-hello", 
+            "text" : "What do you want?",
+            "associated-delegate" : "collectInput"
+        },{ 
+            "lang" : "en", 
+            "intent" : "greeting-bye",
+            "text" : "Alright then. Good-day"
+        }
+    ]
+}

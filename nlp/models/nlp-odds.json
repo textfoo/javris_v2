@@ -1,0 +1,16 @@
+{
+    "docs" : [
+        {
+            "lang" : "en", 
+            "text" : "odds %number%/%number%", 
+            "intent" : "odds"
+        }
+    ],
+    "answers" : [ 
+        {
+            "lang" : "en", 
+            "intent" : "odds", 
+            "text" : "{{number}}"
+        }
+    ]
+}

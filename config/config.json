@@ -1,0 +1,14 @@
+{
+    "version": "1.0",
+    "prefix": "@",
+    "client-id": 515574645013872647,
+    "client-secret": "",
+    "token": "",
+    "permissions" : 8,
+    "twitchId" : "", 
+    "twitchSecret" : "",
+    "twitchRedirect" : "http://localhost",
+    "twitch-oauth" : "oauth:", 
+    "log" : true
+  }
+  
