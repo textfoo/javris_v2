@@ -140,12 +140,31 @@ class BrokerInterface {
             const response = await collection.aggregate([
                 { $unwind : '$books' },
                 { $match : { 'books._id' :  ObjectId(betId)}}, 
-                { $project : { 'books.text' : 1, 'books.open' : 1, 'books.odds' : 1 }}
+                { $project : { 'user.userId' : 1, 'books.text' : 1, 'books.open' : 1, 'books.odds' : 1 }}
             ]).toArray();
             Logger.debug(`BrokerInterface | fetchBookByBetId | response : ${response}`);
             return response; 
         }catch(error) {
             Logger.error(`BrokerInterface | fetchBookByBetId | error : ${error}`); 
+        }
+    }
+
+    static async fetchBooksByUserId(user) { 
+        try {
+            Logger.info(`book | fetchBooksByUserId | user : ${JSON.stringify(user)}`);
+            const response = await collection.aggregate([
+                { $match : { 'user.userId' : user.userId }}, 
+                { $unwind : '$books' }, 
+                { $match : { 'books.open' : true }},
+                { $project : { 
+                    'books._id' : 1, 'books.text' : 1, 'books.odds' : 1, 'books.created' : 1, 
+                    bets : { $size : '$books.bets' }
+                     }}
+            ]).toArray();
+            Logger.info(`BrokerInterface | fetchBooksByUserId | response : ${JSON.stringify(response)}`);
+            return response; 
+        }catch(error) {
+            Logger.error(`BrokerInterface | fetchBooksByUserId | error : ${error}`); 
         }
     }
 
@@ -156,12 +175,28 @@ class BrokerInterface {
                 { $unwind :  '$books' },
                 { $match : { 'books._id' : ObjectId(bookId) }}, 
                 { $unwind : '$books.bets' },
-                { $project : {  'books.bets' : 1  }}
+                { $project : { 'books.bets' : 1  }}
             ]).toArray();
-            Logger.info(`BrokerInterface | fetchBetsByBookId | response : ${JSON.stringify(response)}`);
+            Logger.debug(`BrokerInterface | fetchBetsByBookId | response : ${JSON.stringify(response)}`);
             return response;
         }catch(error) {
             Logger.error(`BrokerInterface | fetchBetsByBookId | error : ${error}`); 
+        }
+    }
+
+    static async fetchBetsByUser(user) {
+        try {
+            Logger.info(`BrokerInterface | fetchBetsByUser | user : ${user}`);
+            const response = await collection.aggregate([
+                { $unwind : '$books' }, 
+                { $project : { 'books.text' : 1, 'books.bets' : 1 }}, 
+                { $unwind : '$books.bets' }, 
+                { $match : { 'books.bets.user.userId' : user.userId }}
+            ]).toArray();
+            Logger.debug(`BrokerInterface | fetchBetsByUser | response : ${JSON.stringify(response)}`);
+            return response; 
+        }catch(error) {
+            Logger.error(`BrokerInterface | fetchBetsByUser | error : ${error}`); 
         }
     }
 

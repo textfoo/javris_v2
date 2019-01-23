@@ -13,6 +13,7 @@ module.exports = {
             case "book-delete" : await deleteBook(message, analysis, user); break; 
             case "book-lookup" : await lookupBook(message, analysis, user); break; 
             case "book-show"   : await fetchBooksByServer(message, analysis, user); break; 
+            case "book-user"   : await fetchBooksByUser(message, analysis, user); break; 
         }
 
 
@@ -73,7 +74,7 @@ module.exports = {
                 Logger.info(`book | closeBook | validation : ${JSON.stringify(validation)}`);
                 //since we're trying to identify a situation in which the payout was either omitted or specified for a party
                 //we need to route to the associated payout function on the broker interface
-                let brokerPayout = missing[0]
+                
                 
 
             }catch(error) {
@@ -118,9 +119,9 @@ module.exports = {
                     const end = new Date(broker.books.end);
                     communication.push(`
                     *Id* : ${broker.books._id}
-                    *Text* : ${broker.books.text}, 
-                    *Odds* : ${broker.books.odds}, 
-                    *Created* : ${created},
+                    *Text* : ${broker.books.text}
+                    *Odds* : ${broker.books.odds}
+                    *Created* : ${created}
                     *End* : ${end}
                     `);
                 });
@@ -131,6 +132,41 @@ module.exports = {
             }
         }
 
+        async function fetchBooksByUser(message, analysis, user) {
+            try {
+                Logger.info(`book | fetchBooksByUser | analysis : ${JSON.stringify(analysis)}, user : ${JSON.stringify(user)}`);
+                const response = await BrokerInterface.fetchBooksByUserId(user); 
+                Logger.info(`book | fetchBooksByUser | response : ${JSON.stringify(response)}`);
+                if(response.length !== 0) {
+                    let bookMsg = []; 
+                    response.map(book => {
+                        bookMsg.push(`
+                            ${book.books._id}
+                            *Text* : ${book.books.text}
+                            *Odds* : ${book.books.odds}
+                            *Bets* : ${book.bets}
+                            *Created* : ${new Date(book.books.created)}
+                        `);
+                    });
+                    await CommunicationInterface.send(message, bookMsg); 
+                    return;
+                }
+                await CommunicationInterface.send(message, [`We don't have any books on record for that Discord User.`]);
+                return; 
 
+            }catch(error) {
+                Logger.error(`book | fetchBooksByUser | error ${error}`)
+            }
+        }
+
+    async function fetchBetsByUser(message, analysis, user) {
+        try {
+            Logger.info(`book | fetchBetsByUser | analysis : ${JSON.stringify(analysis)}, user : ${JSON.stringify(user)}`);
+
+            
+        }catch(error) {
+            Logger.error(`book | fetchBetsByUser | error ${error}`)
+        }
+    }
     }
 }

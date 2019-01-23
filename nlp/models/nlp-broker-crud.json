@@ -55,6 +55,14 @@
             "lang" : "en",
             "text" : "find book",
             "intent" : "book-find"
+        }, {
+            "lang" : "en",
+            "text" : "my books", 
+            "intent" : "book-user"
+        }, {
+            "lang" : "en", 
+            "text" : "my bets", 
+            "intent" : "bet-user"
         }
     ], 
     "answers" : [
@@ -82,6 +90,14 @@
             "lang" :"en",
             "intent" : "book-show", 
             "text" : "Fetching books..."
+        }, {
+            "lang" : "en", 
+            "intent" : "book-user", 
+            "text" : "Fetching your books..."
+        }, {
+            "lang" : "en", 
+            "intent" : "bet-user", 
+            "text" : "Fetching your bets..."
         }
     ]
 }
