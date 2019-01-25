@@ -1,3 +1,5 @@
+### Users can check out our [User Manual Wiki](https://github.com/textfoo/javris_v2/wiki/User-Manual)
+### Developers can
 
 ## Local Dev Setup     
 **Assumes you're starting with nothing**    
