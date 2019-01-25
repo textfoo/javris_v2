@@ -65,3 +65,5 @@ config/*
 config/prod/config.json
 config/prod/db-config.json
 config/prod/socket-config.json
+
+config/
