@@ -1,26 +1,23 @@
 
 
-###### Local Dev Setup     
-**Assumes you're starting with nothing**
+## Local Dev Setup     
+**Assumes you're starting with nothing**    
 *prerequisites*    
  -[Install NodeJS](https://nodejs.org/en/) *//Current Version 10.15.0 LTS*    
  -[Install npm](https://docs.npmjs.com/cli/install)    
  -[Install git](https://git-scm.com/downloads)    
- -(Optional)[Install Kraken](https://app.gitkraken.com)    
- -[Install MongoDB](https://www.mongodb.com/download-center/community)     
- *Optional - start mongodb as a service*    
+ -[Install Kraken](https://app.gitkraken.com) *(Optional)*   
+ -[Install MongoDB](https://www.mongodb.com/download-center/community) *Optional - start mongodb as a service*        
  -[Install an IDE](https://code.visualstudio.com)    
- 
+ -[Install Discord](https://discordapp.com/download) *(Optional)* 
 ###### Internal Resources   
  [Kraken Kanban](https://app.gitkraken.com/glo/board/XEpW1ZJoLwAPIu7A)    
  [Developer Discord](https://discord.gg/Ue8XBb7)    
- 
- ### Instructions    
+ ### Setup Instructions    
  *Download and install the necessary items listed in the prerequisite portion above*    
- 
  ##### Clone the Repo
  Create an empty folder somewhere to clone the repo in. 
- ex. C:/github/jarvis_v2/
+ ex. *C:/github/*
  ```
  //navigate into the desired directory
  >cd C:/github/jarvis_v2/
@@ -34,6 +31,40 @@
  //restore dependencies 
  C:/github/jarvis_v2>npm install
  //after the command is ran you should see something along the lines of
- added 413 packages from 323 contributors and audited 4578 packages in 5.376s 
+ added [x] packages from [x] contributors and audited [x] packages in 5.376s 
  ```
- 
+  ##### Setup Discord for Devlopment
+  Create an [bot/application](https://discordapp.com/developers/applications).    
+  Copy down the **Client ID** and **Client Secret**     
+  Create a private Discord Guild/Server     
+  **OR**      
+  Join the [Developer Discord](https://discord.gg/Ue8XBb7), you will require the developer role in order to invite the new bot.    
+  Navigate to : https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID_GOES_HERE&scope=bot&permissions=0     
+  *Add a bot to a server* > *Select a server* > discord-bot-dev | whatever-server-you-created    
+  ##### Setup Project Config for Development
+  Navigate to the config folder within the project's directory. ex. *C:/github/jarvis_v2/config/config.json*    
+  ```
+  {
+  "version": "1.0",
+  "prefix": "@",
+  "client-id": [CLIENT-ID-GOES-HERE],
+  "client-secret": [CLIENT-SECRETE-GOES-HJERE],
+  "token": "",
+  "permissions" : 8,
+  "twitchId" : "", 
+  "twitchSecret" : "",
+  "twitchRedirect" : "http://localhost/",
+  "twitch-oauth" : "oauth:", 
+  "log" : true
+  }
+  ```
+  Navigate to the config folder within the project's directory. ex. *C:/github/jarvis_v2/config/config.json*   
+  You'll need to modify your [connection string](https://docs.mongodb.com/manual/reference/connection-string/)    
+  ```
+  {
+    "connectionString" : "mongodb://localhost:27017/admin?readPreference=primary",
+    "log" : true
+  }
+  ```
+  ### Running Instructions
+  
