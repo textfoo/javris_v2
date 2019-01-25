@@ -74,11 +74,12 @@
   ## Running Instructions     
   [Nodemon](https://nodemon.io/) is installed for automatic reloading.  
   ##### Visual Studio Code:    
-   -Start up Visual Studio Code. 
-    -*File -> Open Folder* -> C:/github/jarvis_v2*
-    -*Terminal -> New Terminal*
-     - Run Command :    
-     ```npm run dev```           
-     ```info Bot Status - Ready : {     client-id   : 000000000000, username : dev, is-bot : true  }```
+   Start up Visual Studio Code.   
+   
+    * File -> Open Folder* -> C:/github/jarvis_v2   
+    * Terminal -> New Terminal  
+      * Run Command :  
+      npm run dev          
+     info Bot Status - Ready : {     client-id   : 000000000000, username : dev, is-bot : true  }
   
   
