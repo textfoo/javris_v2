@@ -32,16 +32,19 @@
  //after the command is ran you should see something along the lines of
  added [x] packages from [x] contributors and audited [x] packages in 5.376s 
  ```
-  ##### Setup Discord for Devlopment
+  #### Setup Discord for Devlopment
   Create an [bot/application](https://discordapp.com/developers/applications).    
   Copy down the **Client ID** and **Client Secret**    
-  *Connecting your application to the network*     
-  Create a private Discord Guild/Server     
+  
+  ##### Connecting your application to the network
+  You can either set a private Discord Guild/Server     
   **OR**      
   Join the [Developer Discord](https://discord.gg/Ue8XBb7), you will require the developer role in order to invite the new bot.   
+  
   **Subtitute your client id in the url below**
   Navigate to : https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID_GOES_HERE&scope=bot&permissions=0     
   *Add a bot to a server* > *Select a server* > discord-bot-dev | whatever-server-you-created    
+  
   ##### Setup Project Config for Development
   Navigate to the config folder within the project's directory. ex. *C:/github/jarvis_v2/config/config.json*    
   ```
@@ -67,19 +70,15 @@
     "log" : true
   }
   ```
+  
   ## Running Instructions     
   [Nodemon](https://nodemon.io/) is installed for automatic reloading.  
   ##### Visual Studio Code:    
    -Start up Visual Studio Code. 
     -*File -> Open Folder* -> C:/github/jarvis_v2*
     -*Terminal -> New Terminal*
-     - Run Command : 
-     ```
-     PS C:\github\jarvis_v2> npm run dev
-     ```     
-     ```    
-     //...bot's startup info & debug logs :     
-     info Bot Status - Ready : {     client-id   : 000000000000, username : dev, is-bot : true  }       
-     ```
+     - Run Command :    
+     ```npm run dev```           
+     ```info Bot Status - Ready : {     client-id   : 000000000000, username : dev, is-bot : true  }```
   
   
