@@ -52,6 +52,11 @@
             "intent" : "book-show"
         },
         {
+            "lang" : "en", 
+            "text" : "show bets",
+            "intent" : "bet-show"
+        },
+        {
             "lang" : "en",
             "text" : "find book",
             "intent" : "book-find"
@@ -63,6 +68,14 @@
             "lang" : "en", 
             "text" : "my bets", 
             "intent" : "bet-user"
+        },{
+            "lang" : "en", 
+            "text" : "close book", 
+            "intent" : "book-close"
+        }, { 
+            "lang" : "en", 
+            "text" : "delete book", 
+            "intent" : "book-delete"
         }
     ], 
     "answers" : [
@@ -98,6 +111,14 @@
             "lang" : "en", 
             "intent" : "bet-user", 
             "text" : "Fetching your bets..."
+        },{
+            "lang" : "en", 
+            "intent" : "book-close", 
+            "text" : "Issuing Close Order..."
+        }, {
+            "lang" : "en", 
+            "intent" : "book-delete", 
+            "text" : "Issing Delete Order..."
         }
     ]
 }

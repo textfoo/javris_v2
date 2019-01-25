@@ -1,0 +1,28 @@
+{
+    "docs" : [
+        {
+            "lang" : "en", 
+            "text" : "payout broker", 
+            "intent" : "payout-broker"
+        }, {
+            "lang" : "en", 
+            "text" : "payout bettor", 
+            "intent" : "payout-bettor"
+        }, {
+            "lang" : "en", 
+            "text" : "payout bets", 
+            "intent" : "payout-bettor"
+        }
+    ],
+    "answers" : [
+        {
+            "lang" : "en", 
+            "intent" : "payout-broker", 
+            "text" : "Paying out broker..."
+        },{
+            "lang" : "en", 
+            "intent" : "payout-bettor", 
+            "text" : "Paying out bettors..."
+        }
+    ]
+}

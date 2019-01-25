@@ -37,7 +37,7 @@
         }, {
             "lang" : "en", 
             "intent" : "tutorial-about", 
-            "text" : "Thank you for asking. Give a second for some self reflection and analysis..."
+            "text" : "Thank you for asking..."
         }
     ]
 }

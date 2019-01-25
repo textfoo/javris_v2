@@ -74,7 +74,11 @@ module.exports = {
                 Logger.info(`book | closeBook | validation : ${JSON.stringify(validation)}`);
                 //since we're trying to identify a situation in which the payout was either omitted or specified for a party
                 //we need to route to the associated payout function on the broker interface
-                
+                if(validation.missing.length < 2) {
+                    
+                }
+                CommunicationInterface.send(message, [`Please specify payout : 'payout bettor' or 'payout broker'.`]);
+                return; 
                 
 
             }catch(error) {

@@ -184,6 +184,18 @@ class BrokerInterface {
         }
     }
 
+    static async fetchBookOwnerByBetId(bookId) {
+        try {
+            Logger.info(`BrokerInterface | fetchBookOwnerByBetId | bookId : ${bookId}`);
+            const response = await collection.findOne(
+                
+            );
+            Logger.debug(`BrokerInterface | fetchBookOwnerByBetId | response : ${response}`);
+        }catch(error) {
+            Logger.error(`BrokerInterface | fetchBookOwnerByBetId | error : ${error}`); 
+        }
+    }
+
     static async fetchBetsByUser(user) {
         try {
             Logger.info(`BrokerInterface | fetchBetsByUser | user : ${user}`);

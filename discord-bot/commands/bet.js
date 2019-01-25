@@ -75,12 +75,12 @@ module.exports = {
 
         async function fetchBetsByBook(message, analysis, user) { 
             try {
-                Logger.info(`bet | showBets | analysis : ${JSON.stringify(analysis)}, user : ${JSON.stringify(user)}`);
+                Logger.info(`bet | fetchBetsByBook | analysis : ${JSON.stringify(analysis)}, user : ${JSON.stringify(user)}`);
                 let id = Parser.parseQuotedText(message.content); 
-                Logger.debug(`bet | showBets | id : ${id}, validation : ${JSON.stringify(validation)}`); 
+                Logger.debug(`bet | fetchBetsByBook | id : ${id}`); 
                 if(id.length > 0) {
                     const bets = await BrokerInterface.fetchBetsByBookId(id); 
-                    
+                    Logger.debug(`bet | fetchBetsByBook | bets : ${JSON.stringify(bets)}`);
                 }
 
 
