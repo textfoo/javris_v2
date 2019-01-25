@@ -1,5 +1,4 @@
 
-
 ## Local Dev Setup     
 **Assumes you're starting with nothing**    
 *prerequisites*    
@@ -20,7 +19,7 @@
  ex. *C:/github/*
  ```
  //navigate into the desired directory
- >cd C:/github/jarvis_v2/
+ >cd C:/github/
  //clone back the repo 
  //this will create 
  C:/github>git clone https://github.com/textfoo/javris_v2.git
@@ -35,10 +34,12 @@
  ```
   ##### Setup Discord for Devlopment
   Create an [bot/application](https://discordapp.com/developers/applications).    
-  Copy down the **Client ID** and **Client Secret**     
+  Copy down the **Client ID** and **Client Secret**    
+  *Connecting your application to the network*     
   Create a private Discord Guild/Server     
   **OR**      
-  Join the [Developer Discord](https://discord.gg/Ue8XBb7), you will require the developer role in order to invite the new bot.    
+  Join the [Developer Discord](https://discord.gg/Ue8XBb7), you will require the developer role in order to invite the new bot.   
+  **Subtitute your client id in the url below**
   Navigate to : https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID_GOES_HERE&scope=bot&permissions=0     
   *Add a bot to a server* > *Select a server* > discord-bot-dev | whatever-server-you-created    
   ##### Setup Project Config for Development
@@ -66,5 +67,19 @@
     "log" : true
   }
   ```
-  ### Running Instructions
+  ## Running Instructions     
+  [Nodemon](https://nodemon.io/) is installed for automatic reloading.  
+  ##### Visual Studio Code:    
+   -Start up Visual Studio Code. 
+    -*File -> Open Folder* -> C:/github/jarvis_v2*
+    -*Terminal -> New Terminal*
+     - Run Command : 
+     ```
+     PS C:\github\jarvis_v2> npm run dev
+     ```     
+     ```    
+     //...bot's startup info & debug logs :     
+     info Bot Status - Ready : {     client-id   : 000000000000, username : dev, is-bot : true  }       
+     ```
+  
   
