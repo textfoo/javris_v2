@@ -1,4 +1,4 @@
-### Further information can out our [Wiki](https://github.com/textfoo/javris_v2/wiki/)
+### Further information can be found in our [Wiki](https://github.com/textfoo/javris_v2/wiki/)
 
 ## Local Dev Setup     
 **Assumes you're starting with nothing**    
