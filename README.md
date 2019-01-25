@@ -1,4 +1,4 @@
-# javris_v2
-A discord betting bot written in nodejs.
 
-
+### SETUP
+*prerequisites*    
+Install [NodeJS](https://nodejs.org/en/) //Current Version 10.15.0 LTS
