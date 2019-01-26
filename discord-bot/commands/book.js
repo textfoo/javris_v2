@@ -3,6 +3,7 @@ const Logger = require("../../utility/logger");
 const Parser = require("../../utility/parser"); 
 const BrokerInterface = require("../../interfaces/broker-interface"); 
 const CommunicationInterface = require("../../interfaces/communication-interface");
+
 module.exports = { 
     name : "book", 
     description : "Book related functions. Create, delete, lookup", 
@@ -74,8 +75,24 @@ module.exports = {
                 Logger.info(`book | closeBook | validation : ${JSON.stringify(validation)}`);
                 //since we're trying to identify a situation in which the payout was either omitted or specified for a party
                 //we need to route to the associated payout function on the broker interface
-                if(validation.missing.length < 2) {
-                    
+                if(validation.missing.length === 1) {
+                    const root = await BrokerInterface.fetchBook(user, bookId); 
+                    Logger.debug(`book | closeBook | book : ${JSON.stringify(root.books.bets)}`);
+                    const bets = root.books.bets; 
+                    let response;  
+                    console.log(validation.missing[0]);
+                    if(validation.missing[0] === 'payout-bettor') {
+                        //this implies we need to payout the broker
+                        let total = 0;
+                        console.log(bets);
+                        bets.forEach((bet) => {
+                            console.log(bet); 
+                            total += parseFloat(bet.amount);
+                        });
+                        response = await BrokerInterface.addWallet(user, parseFloat(total)); 
+                        Logger.debug(`book | closeBook | response : ${JSON.stringify(response)}`);
+                    }
+                    return; 
                 }
                 CommunicationInterface.send(message, [`Please specify payout : 'payout bettor' or 'payout broker'.`]);
                 return; 
@@ -162,15 +179,5 @@ module.exports = {
                 Logger.error(`book | fetchBooksByUser | error ${error}`)
             }
         }
-
-    async function fetchBetsByUser(message, analysis, user) {
-        try {
-            Logger.info(`book | fetchBetsByUser | analysis : ${JSON.stringify(analysis)}, user : ${JSON.stringify(user)}`);
-
-            
-        }catch(error) {
-            Logger.error(`book | fetchBetsByUser | error ${error}`)
-        }
-    }
     }
 }

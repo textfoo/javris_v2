@@ -98,8 +98,15 @@ class BrokerInterface {
 
     static async fetchBook(user, bookId) {
         try {
-            Logger.info(`BrokerInterface | fetchBook | user : ${user}, bookId : ${bookId}`); 
-
+            Logger.info(`BrokerInterface | fetchBook | user : ${JSON.stringify(user)}, bookId : ${bookId}`); 
+            const response = await collection.aggregate([
+                { $match : { 'user.userId' : user.userId}},
+                { $unwind : '$books' },
+                { $match : { 'books._id' : ObjectId(bookId) }},
+                { $project : { 'books' : 1}}
+            ]).toArray();
+            Logger.debug(`BrokerInterface | fetchBook | response : ${response}`);
+            return response[0]; 
         }catch(error) {
             Logger.error(`BrokerInterface | fetchBook | error : ${error}`); 
         }
@@ -188,13 +195,15 @@ class BrokerInterface {
         try {
             Logger.info(`BrokerInterface | fetchBookOwnerByBetId | bookId : ${bookId}`);
             const response = await collection.findOne(
-                
+
             );
             Logger.debug(`BrokerInterface | fetchBookOwnerByBetId | response : ${response}`);
         }catch(error) {
             Logger.error(`BrokerInterface | fetchBookOwnerByBetId | error : ${error}`); 
         }
     }
+
+    
 
     static async fetchBetsByUser(user) {
         try {
@@ -230,6 +239,7 @@ class BrokerInterface {
         try {
             Logger.info(`BrokerInterface | addWallet | user : ${JSON.stringify(user)}, amount : ${amount}`); 
             const bal = await this.fetchBalance(user); 
+            Logger.debug(`BrokerInterface | addWallet | bal : ${JSON.stringify(bal)}`); 
             const updated = parseFloat(bal.wallet.balance) + parseFloat(amount); 
             let response = await collection.findOneAndUpdate(
                 { 'user.userId' : user.userId }, 
