@@ -119,8 +119,9 @@ class BrokerInterface {
             Logger.info(`BrokerInterface | fetchBooksByServer | user : ${user}, serverId : ${serverId}`);
             let response = await collection.aggregate([
                 { $match : { 'books.serverId' : serverId  }},
-                { $project : { 'books._id' : 1, 'books.text' : 1, 'books.created' : 1, 'books.end' : 1, 'books.odds' : 1 }},
-                { $unwind : '$books' }
+                { $project : { 'books._id' : 1, 'books.text' : 1, 'books.created' : 1, 'books.end' : 1, 'books.odds' : 1, 'books.open' : 1 }},
+                { $unwind : '$books' },
+                { $match : { 'books.open' : true }}
              ]).toArray();
              Logger.debug(`BrokerInterface | fetchBooksByServer | response : ${response}`);
              return response;

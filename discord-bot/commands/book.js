@@ -115,33 +115,14 @@ module.exports = {
             }
         }
 
-        async function deleteBook(message, analysis, user) {
-            try {
-
-            }catch(error){
-
-            }
-        }
-
-        async function lookupBook(message, analysis, user) {
-            try {
-
-            }catch(error) {
-                
-            }
-        }
-
-        //
-
-
         async function fetchBooksByServer(message, analysis, user) {
             try {
                 Logger.info(`book | fetchBooksByServer | analysis : ${JSON.stringify(analysis)}, user : ${JSON.stringify(user)}`);
                 Logger.info(`book | fetchBooksByServer | guild : ${JSON.stringify(message.guild.id)}`);
                 const response = await BrokerInterface.fetchBooksByServer(user, message.guild.id); 
                 Logger.debug(`book | fetchBooksByServer | response : ${JSON.stringify(response)}`);
-                if(response == null) {
-                    await message.channel.send(` Apologies, I was unable to fetch the books on the server. Something is quite broken.`); 
+                if(response == null | response.length === 0) {
+                    await CommunicationInterface.send(message, [`Unable to identify any books on the server.`]); 
                     return; 
                 }
 
@@ -150,13 +131,7 @@ module.exports = {
                     Logger.debug(`book | fetchBooksByServer | response.forEach : ${JSON.stringify(broker)}`);
                     const created = new Date(broker.books.created);
                     const end = new Date(broker.books.end);
-                    communication.push(`
-                    *Id* : ${broker.books._id}
-                    *Text* : ${broker.books.text}
-                    *Odds* : ${broker.books.odds}
-                    *Created* : ${created}
-                    *End* : ${end}
-                    `);
+                    communication.push(`\n------------------\n*Id* : ${broker.books._id},\n*Text* : ${broker.books.text},\n*Odds* : ${broker.books.odds},\n*Created* : ${created}\n*End* : ${end}\n------------------------------`);
                 });
                 Logger.debug(`book | fetchBooksByServer | communication : ${JSON.stringify(communication)}`);
                 await CommunicationInterface.send(message, communication); 
