@@ -77,24 +77,36 @@ module.exports = {
                 //we need to route to the associated payout function on the broker interface
                 if(validation.missing.length === 1) {
                     const root = await BrokerInterface.fetchBook(user, bookId); 
-                    Logger.debug(`book | closeBook | book : ${JSON.stringify(root.books.bets)}`);
-                    const bets = root.books.bets; 
-                    let response;  
-                    console.log(validation.missing[0]);
-                    if(validation.missing[0] === 'payout-bettor') {
-                        //this implies we need to payout the broker
-                        let total = 0;
-                        console.log(bets);
-                        bets.forEach((bet) => {
-                            console.log(bet); 
-                            total += parseFloat(bet.amount);
-                        });
-                        response = await BrokerInterface.addWallet(user, parseFloat(total)); 
-                        Logger.debug(`book | closeBook | response : ${JSON.stringify(response)}`);
+                    Logger.debug(`book | closeBook | book : ${JSON.stringify(root)}`);
+                    if(root.books.open === true) {
+                        const bets = root.books.bets; 
+                        if(validation.missing[0] === 'payout-bettor') {
+                            //this implies we need to payout the broker
+                            let total = 0;
+                            bets.forEach((bet) => {
+                                total += parseFloat(bet.amount);
+                            });
+                            const walletAddResponse = await BrokerInterface.addWallet(user, parseFloat(total));
+                            const closeResponse = await BrokerInterface.closeBook(user, bookId); 
+                            Logger.debug(`book | closeBook | walletAddResponse : ${JSON.stringify(walletAddResponse)}, closeResponse : ${JSON.stringify(closeResponse)}`);
+                            if(walletAddResponse.lastErrorObject.updatedExisting === true && closeResponse.result.nModified === 1) {
+                                await CommunicationInterface.send(message, [`Book '${bookId}' has been closed. $${total} has been deposited into your wallet.`]);
+                                return; 
+                            }
+                        }
+                        if(validation.missing[0] === 'payout-broker') {
+                            //this implies we need to payout folks who placed bets
+                            const batchResponse = await BrokerInterface.addWalletBatch(bets); 
+                            const closeResponse = await BrokerInterface.closeBook(user, bookId); 
+                            Logger.debug(`book | closeBook | addWalletBatch : ${JSON.stringify(batchResponse)}, closeResponse : ${JSON.stringify(closeResponse)}`);
+                            await CommunicationInterface.send(message, [`A total of ${parseFloat(batchResponse.total).toFixed(2)} has been deposited into ${batchResponse.users} wallets.`]);
+                            return; 
+                        }
                     }
+                    await CommunicationInterface.send(message, [`Book '${bookId} has already been closed.'`]);
                     return; 
                 }
-                CommunicationInterface.send(message, [`Please specify payout : 'payout bettor' or 'payout broker'.`]);
+                await CommunicationInterface.send(message, [`Please specify payout : 'payout bettor' or 'payout broker'.`]);
                 return; 
                 
 

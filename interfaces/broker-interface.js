@@ -89,8 +89,10 @@ class BrokerInterface {
             Logger.info(`BrokerInterface | closeBook | user : ${user}, bookId : ${bookId}`); 
             var response = await collection.updateOne(
                 { 'user.userId' : user.userId, 'books._id' : ObjectId(bookId) },
-                { $set : { 'books.open' : false }}
+                { $set : { 'books.$.open' : false }}
             );
+            Logger.debug(`BrokerInterface | closeBook | response : ${JSON.stringify(response)}`); 
+            return response;
         }catch(error) {
             Logger.error(`BrokerInterface | closeBook | error : ${error}`); 
         }
@@ -250,6 +252,22 @@ class BrokerInterface {
             return response; 
         }catch(error) {
             Logger.error(`BrokerInterface | addWallet | error : ${error}`); 
+        }
+    }
+
+    static async addWalletBatch(bets) {
+        try {
+            Logger.info(`BrokerInterface | addWalletBatch | bets : ${JSON.stringify(bets)}`); 
+            let total = 0; 
+            let users = 0; 
+            await Promise.all(bets.map(async (bet) => {
+                total += parseFloat(bet.payout);
+                users++;  
+                await this.addWallet(bet.user, parseFloat(bet.payout)); 
+            }));
+            return { 'users' : users, 'total' : total}; 
+        }catch(error) {
+            Logger.error(`BrokerInterface | addWalletBatch | error : ${error}`); 
         }
     }
 

@@ -17,7 +17,6 @@ class CommunicationInterface {
 
     static async send(message, content) {
         Logger.info(`CommunicationInterface | send | content : ${JSON.stringify(content)}`);
-        console.log(`length : ${content.length}`);
         try {
             let queue = '';
             let iterator = 2; 
