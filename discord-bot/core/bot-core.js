@@ -30,8 +30,9 @@ class Bot {
         try{
             if(message.content.indexOf(client.user.id) > -1) {
                 message.content = message.content.replace(`<@${client.user.id}>`, '').trim();
-                Logger.info(`bot-core | content : ${message.content}`);
-                const analysis = await nlp.analyze(message.content);
+                const trimmed = message.content.replace(/'.*?'/g, ''); 
+                Logger.info(`bot-core | content : ${message.content} | trimmed : ${trimmed}`);
+                const analysis = await nlp.analyze(trimmed);
                 await Promise.all(analysis.map(async (item) => {
                     //the root command is the first signifier as to which discord-bot command we'll route too
                     const root = item.label.split('-')[0]; 
