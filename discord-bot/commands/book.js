@@ -23,7 +23,8 @@ module.exports = {
                 Logger.info(`book | createBook | analysis : ${JSON.stringify(analysis)}, user : ${JSON.stringify(user)}`);
                 let validation = Parser.parseParameters(analysis, [ 'book-create', 'odds' ]);
                 const text = Parser.parseQuotedText(message.content);
-                Logger.debug(`book | createBook | text : ${text} | validation : ${JSON.stringify(validation)}`);
+                const tags = Parser.parseTags(message.content); 
+                Logger.debug(`book | createBook | text : ${text} | tags : ${tags}, validation : ${JSON.stringify(validation)}`);
                 const odds = validation.response.find(item => item.name == 'odds').value; 
                 if(validation.missing.length === 0 && text && message.guild !== null) {
                     let book = { 
@@ -32,8 +33,8 @@ module.exports = {
                         'serverId' : message.guild.id,
                         'odds' : odds,
                         'created' : Date.now(),
-                        //'end' : Date.parse(validation.response.find(item => item.name == 'date-end').value) || '-',
-                        bets : []
+                        'tags' : tags, 
+                        bets : [],
                     }
                     console.log('creating book...'); 
                     const response = await BrokerInterface.createBook(user, book); 
@@ -49,7 +50,6 @@ module.exports = {
                         await message.channel.send(`Book ${response.result._id} has been created.`);
                          return; 
                      }
-
                      if(response.result.n !== 0 ){
                          validation.missing.push("unable to locate that broker (have you 'setup' yet?)");
                      }

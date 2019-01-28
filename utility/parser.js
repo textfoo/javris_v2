@@ -35,6 +35,17 @@ class Parser {
             Logger.error(`Parser | parseParameters | error : ${error} `);
         }
     }
+
+    static parseTags(content) {
+        try {
+            Logger.info(`Parser | parseTags | parseTags : ${JSON.stringify(content)}`);
+            const matches = content.match(/(#[^ ]+)/g); 
+            Logger.debug(`Parser | matches : ${JSON.stringify(matches)}`);
+            return matches; 
+        }catch(error) {
+            Logger.error(`Parser | parseTags | error : ${error} `);
+        }
+    }
 }
 
 module.exports = Parser;
