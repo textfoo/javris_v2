@@ -39,7 +39,7 @@ class Parser {
     static parseTags(content) {
         try {
             Logger.info(`Parser | parseTags | parseTags : ${JSON.stringify(content)}`);
-            const matches = content.match(/(#[^ ]+)/g); 
+            const matches = content.match(/(#[^ ]+)/g) || []; 
             Logger.debug(`Parser | matches : ${JSON.stringify(matches)}`);
             return matches; 
         }catch(error) {

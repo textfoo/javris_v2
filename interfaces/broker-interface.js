@@ -130,6 +130,23 @@ class BrokerInterface {
         }
     }
 
+    static async fetchBooksByServerTags(user, serverId, tags) {
+        try { 
+            Logger.info(`BrokerInterface | fetchBooksByServerTags | user : ${user}, serverId : ${serverId}, tags : ${tags}`);
+            let response = await collection.aggregate([
+                { $match : { 'books.serverId' : serverId  }},
+                { $project : { 'books._id' : 1, 'books.text' : 1, 'books.created' : 1, 'books.end' : 1, 'books.odds' : 1, 'books.open' : 1, 'books.tags' : 1 }},
+                { $unwind : '$books' },
+                { $match : { 'books.open' : true}},
+                { $match : { 'books.tags' : { $in : tags }}}
+             ]).toArray();
+             Logger.debug(`BrokerInterface | fetchBooksByServerTags | response : ${response}`);
+             return response;
+        }catch(error) {
+            Logger.error(`BrokerInterface | fetchBooksByServerTags | error : ${error}`); 
+        }
+    }
+
     static async createBet(bookId, bet) {
         try {
             Logger.info(`book | createBet | bookId : ${bookId}, bookId : ${JSON.stringify(bet)}`);

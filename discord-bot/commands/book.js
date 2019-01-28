@@ -121,13 +121,19 @@ module.exports = {
             try {
                 Logger.info(`book | fetchBooksByServer | analysis : ${JSON.stringify(analysis)}, user : ${JSON.stringify(user)}`);
                 Logger.info(`book | fetchBooksByServer | guild : ${JSON.stringify(message.guild.id)}`);
-                const response = await BrokerInterface.fetchBooksByServer(user, message.guild.id); 
+                const tags = Parser.parseTags(message.content); 
+                let response; 
+                if(tags.length === 0) { 
+                     response = await BrokerInterface.fetchBooksByServer(user, message.guild.id); 
+                }else if(tags.length > 0) {
+                    response = await BrokerInterface.fetchBooksByServerTags(user, message.guild.id, tags); 
+                }
                 Logger.debug(`book | fetchBooksByServer | response : ${JSON.stringify(response)}`);
                 if(response == null | response.length === 0) {
-                    await CommunicationInterface.send(message, [`Unable to identify any books on the server.`]); 
+                    await CommunicationInterface.send(message, [`No books returned.`]); 
                     return; 
                 }
-
+                
                 let communication = []; 
                 response.forEach( broker => {
                     Logger.debug(`book | fetchBooksByServer | response.forEach : ${JSON.stringify(broker)}`);
