@@ -119,8 +119,7 @@ module.exports = {
 
         async function fetchBooksByServer(message, analysis, user) {
             try {
-                Logger.info(`book | fetchBooksByServer | analysis : ${JSON.stringify(analysis)}, user : ${JSON.stringify(user)}`);
-                Logger.info(`book | fetchBooksByServer | guild : ${JSON.stringify(message.guild.id)}`);
+                Logger.info(`book | fetchBooksByServer | analysis : ${JSON.stringify(analysis)}, user : ${JSON.stringify(user)}, guild : ${JSON.stringify(message.guild.id)}`);
                 const tags = Parser.parseTags(message.content); 
                 let response; 
                 if(tags.length === 0) { 
@@ -133,7 +132,7 @@ module.exports = {
                     await CommunicationInterface.send(message, [`No books returned.`]); 
                     return; 
                 }
-                
+
                 let communication = []; 
                 response.forEach( broker => {
                     Logger.debug(`book | fetchBooksByServer | response.forEach : ${JSON.stringify(broker)}`);
