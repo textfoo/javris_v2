@@ -119,7 +119,7 @@ class BrokerInterface {
             Logger.info(`BrokerInterface | fetchBooksByServer | user : ${user}, serverId : ${serverId}`);
             let response = await collection.aggregate([
                 { $match : { 'books.serverId' : serverId  }},
-                { $project : { 'books._id' : 1, 'books.text' : 1, 'books.created' : 1, 'books.end' : 1, 'books.odds' : 1, 'books.open' : 1 }},
+                { $project : { 'books' : 1 }},
                 { $unwind : '$books' },
                 { $match : { 'books.open' : true, 'books.serverId' : serverId }}
              ]).toArray();
@@ -135,7 +135,7 @@ class BrokerInterface {
             Logger.info(`BrokerInterface | fetchBooksByServerTags | user : ${user}, serverId : ${serverId}, tags : ${tags}`);
             let response = await collection.aggregate([
                 { $match : { 'books.serverId' : serverId  }},
-                { $project : { 'books._id' : 1, 'books.text' : 1, 'books.created' : 1, 'books.end' : 1, 'books.odds' : 1, 'books.open' : 1, 'books.tags' : 1 }},
+                { $project : { 'books' : 1 }},
                 { $unwind : '$books' },
                 { $match : { 'books.open' : true}},
                 { $match : { 'books.tags' : { $in : tags }}}
