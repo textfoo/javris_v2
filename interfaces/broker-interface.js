@@ -121,7 +121,7 @@ class BrokerInterface {
                 { $match : { 'books.serverId' : serverId  }},
                 { $project : { 'books._id' : 1, 'books.text' : 1, 'books.created' : 1, 'books.end' : 1, 'books.odds' : 1, 'books.open' : 1 }},
                 { $unwind : '$books' },
-                { $match : { 'books.open' : true }}
+                { $match : { 'books.open' : true, 'books.serverId' : serverId }}
              ]).toArray();
              Logger.debug(`BrokerInterface | fetchBooksByServer | response : ${response}`);
              return response;
