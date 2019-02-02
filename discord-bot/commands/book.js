@@ -15,6 +15,7 @@ module.exports = {
             case "book-lookup" : await lookupBook(message, analysis, user); break; 
             case "book-show"   : await fetchBooksByServer(message, analysis, user); break; 
             case "book-user"   : await fetchBooksByUser(message, analysis, user); break; 
+            case "wallet-show" : await lookupWallet(message, analysis, user); break; 
         }
 
 
@@ -26,7 +27,7 @@ module.exports = {
                 const tags = Parser.parseTags(message.content); 
                 Logger.debug(`book | createBook | text : ${text} | tags : ${tags}, validation : ${JSON.stringify(validation)}`);
                 const odds = validation.response.find(item => item.name == 'odds').value; 
-                if(validation.missing.length === 0 && text && message.guild !== null) {
+                if(validation.missing.length === 0 && text && message.guild !== null && odds[0] !== '0' && odds[2]!==0) {
                     let book = { 
                         'text' : text, 
                         'open' : true,
@@ -170,7 +171,20 @@ module.exports = {
                 return; 
 
             }catch(error) {
-                Logger.error(`book | fetchBooksByUser | error ${error}`)
+                Logger.error(`book | fetchBooksByUser | error ${error}`);
+            }
+        }
+
+        async function lookupWallet(message, analysis, user) {
+            try {
+                Logger.info(`book | lookupWallet | analysis : ${JSON.stringify(analysis)}, user : ${JSON.stringify(user)}`);
+                const response = await BrokerInterface.fetchBalance(user); 
+                Logger.info(`book | fetchBalance | response : ${JSON.stringify(response)}`);
+                if(response !== null) {
+                    const balance = 
+                }
+            }catch(error) {
+                Logger.error(`book | lookupWallet | error ${error}`);
             }
         }
     }

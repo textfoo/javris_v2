@@ -297,12 +297,6 @@ class BrokerInterface {
         }
     }
 
-    /*
-    Parameters : {
-        ex. odds : [ '4', '2' ] //over/under values 
-        ex. input : '4' //bet value
-    }
-    */
     static calculatePayout(odds, input) {
         try {
             Logger.info(`BrokerInterface | calculatePayout | odds : ${odds}, input : ${input}`);
